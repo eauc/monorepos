@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v3
         with:
@@ -22,7 +24,7 @@ jobs:
         run: npm ci
 
       - name: Boostrap
-        run: npx lerna bootstrap --since master
+        run: npx lerna bootstrap --since origin/master --force-local
 
       - name: Test
-        run: npx lerna run test --since master
+        run: npx lerna run test --since origin/master
