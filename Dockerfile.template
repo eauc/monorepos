@@ -1,12 +1,16 @@
 FROM node:16 as build
 
+WORKDIR /app/packages
+
+${COPIES}
+RUN ls .
+
 WORKDIR /app
-
-COPY . .
-
+COPY package*.json ./
+COPY lerna.json ./
 RUN npm ci
 ARG BUILD_SCOPE
-RUN npx lerna bootstrap --scope=$BUILD_SCOPE --include-dependencies
+RUN npx lerna bootstrap --scope=${BUILD_SCOPE} --include-dependencies
 
 FROM build as development
 

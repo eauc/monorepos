@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build:bootstrap && npm run build:scope",
+    "build:bootstrap": "lerna bootstrap --scope=$SCOPE --include-dependencies",
+    "build:scope": "lerna run build --scope=$SCOPE --include-dependencies",
+    "post:build": "lerna run prune --scope=$SCOPE --include-dependencies -- --production"
   },
   "author": "",
   "license": "ISC",
