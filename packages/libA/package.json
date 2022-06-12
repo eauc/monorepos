@@ -1,0 +1,14 @@
+{
+  "name": "libA",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"libA tests\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+     "libB": "^1.0.0"
+  }
+}

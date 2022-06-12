@@ -1,0 +1,15 @@
+{
+  "name": "app3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"app3 tests\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+     "libB": "1.0.0",
+     "libC": "1.0.0"
+  }
+}
