@@ -13,6 +13,8 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v3
         with:
@@ -22,7 +24,11 @@ jobs:
         run: npm ci
 
       - name: Boostrap
-        run: npx lerna bootstrap --since master
+        run: npx lerna bootstrap --force-local
 
-      - name: Test
-        run: npx lerna run test --since master
+      - name: Check changed
+        id: check-changed
+        run: echo "::set-output name=CHANGED_PACKAGES::$( npx lerna ls --since origin/master )"
+
+      - name: echo
+        run: echo "changed packages are ${{ steps.check-changed.outputs.CHANGED_PACKAGES }}"
