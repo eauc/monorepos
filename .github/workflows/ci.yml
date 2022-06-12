@@ -28,7 +28,31 @@ jobs:
 
       - name: Check changed
         id: check-changed
-        run: echo "::set-output name=CHANGED_PACKAGES::$( npx lerna ls --since origin/master )"
+        run: echo "::set-output name=CHANGED_PACKAGES::$( npx lerna ls --since origin/master | tr '\n' ' ' )"
 
       - name: echo
         run: echo "changed packages are ${{ steps.check-changed.outputs.CHANGED_PACKAGES }}"
+
+      - name: test app1
+        if: ${{ contains(steps.check-changed.outputs.CHANGED_PACKAGES, 'app1') }}
+        run: npx lerna run test --scope app1
+
+      - name: test app2
+        if: ${{ contains(steps.check-changed.outputs.CHANGED_PACKAGES, 'app2') }}
+        run: npx lerna run test --scope app2
+
+      - name: test app3
+        if: ${{ contains(steps.check-changed.outputs.CHANGED_PACKAGES, 'app3') }}
+        run: npx lerna run test --scope app3
+
+      - name: test libA
+        if: ${{ contains(steps.check-changed.outputs.CHANGED_PACKAGES, 'libA') }}
+        run: npx lerna run test --scope libA
+
+      - name: test libB
+        if: ${{ contains(steps.check-changed.outputs.CHANGED_PACKAGES, 'libB') }}
+        run: npx lerna run test --scope libB
+
+      - name: test libC
+        if: ${{ contains(steps.check-changed.outputs.CHANGED_PACKAGES, 'libC') }}
+        run: npx lerna run test --scope libC
