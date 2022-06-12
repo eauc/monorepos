@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "prepare": "echo 'prepare libC'",
     "test": "echo \"libC tests\""
   },
   "author": "",

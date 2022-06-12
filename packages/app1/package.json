@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "echo 'run --dev app1'",
+    "prod": "echo 'run --prod app1'",
+    "prepare": "echo 'prepare app1'",
     "test": "echo \"app1 tests\""
   },
   "author": "",

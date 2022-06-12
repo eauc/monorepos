@@ -1,0 +1,22 @@
+FROM node:16 as build
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm ci
+ARG BUILD_SCOPE
+RUN npx lerna bootstrap --scope=$BUILD_SCOPE --include-dependencies
+
+FROM build as development
+
+ENV RUN_SCOPE=$BUILD_SCOPE
+CMD ["npx","lerna","run","dev","--scope=${RUN_SCOPE}"]
+
+FROM build as production
+
+RUN npx lerna run prune -- --production
+# RUN rm `npx lerna ls - npx lerna ls --scope=$BUILD_SCOPE --include-dependencies`
+
+ENV RUN_SCOPE=$BUILD_SCOPE
+CMD ["npx","lerna","run","prod","--scope=${RUN_SCOPE}"]
